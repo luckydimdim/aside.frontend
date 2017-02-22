@@ -11,6 +11,8 @@ import 'package:angular_utils/cm_router_link.dart';
 import 'package:master_layout/master_layout_component.dart';
 
 import 'package:aside/aside_component.dart';
+import 'package:aside/aside_service.dart';
+import 'package:aside/pane_types.dart';
 
 bool get isDebug =>
     (const String.fromEnvironment('PRODUCTION', defaultValue: 'false')) != 'true';
@@ -21,9 +23,19 @@ bool get isDebug =>
       ROUTER_PROVIDERS,
       const Provider(LocationStrategy, useClass: HashLocationStrategy)])
 @View(
-    template: '<master-layout><aside></aside></master-layout>',
+    template: '<master-layout></master-layout>',
     directives: const [MasterLayoutComponent, AsideComponent, RouterOutlet, CmRouterLink])
-class AppComponent {}
+class AppComponent {
+
+  final AsideService _asideService;
+
+  AppComponent(this._asideService) {
+    _asideService.addPane(PaneType.Timeline);
+    _asideService.addPane(PaneType.Dashboard);
+    _asideService.addPane(PaneType.Messages);
+
+  }
+}
 
 main() async {
   if (isDebug) {
@@ -32,7 +44,7 @@ main() async {
 
   ComponentRef ref = await bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
-    const Provider(LocationStrategy, useClass: HashLocationStrategy)]);
+    const Provider(LocationStrategy, useClass: HashLocationStrategy), const Provider(AsideService)]);
 
   if (isDebug) {
     print('Application in DebugMode');
