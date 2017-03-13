@@ -47,8 +47,6 @@ class AsideComponent
   }
 
   void removePane(PaneType type) {
-    print('removePane');
-
     switch (type) {
       case PaneType.Dashboard:
         panes.remove(DashboardPaneComponent);
