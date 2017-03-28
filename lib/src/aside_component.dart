@@ -8,12 +8,12 @@ import 'package:aside/aside_service.dart';
 import 'package:aside/pane_types.dart';
 
 @Component(selector: 'aside')
-@View(templateUrl: 'aside_component.html',
-    directives: const [
-      PaneWrapperComponent, DashboardPaneComponent, MessagesPaneComponent
-    ])
-class AsideComponent
-    implements AfterViewInit {
+@View(templateUrl: 'aside_component.html', directives: const [
+  PaneWrapperComponent,
+  DashboardPaneComponent,
+  MessagesPaneComponent
+])
+class AsideComponent implements AfterViewInit {
   final ChangeDetectorRef _changeDetectorRef;
   final AsideService _asideService;
   Map<Type, AbstractPane> panes = new Map<Type, AbstractPane>();
@@ -26,8 +26,7 @@ class AsideComponent
   }
 
   @override
-  void ngAfterViewInit() {
-  }
+  void ngAfterViewInit() {}
 
   void addPane(PaneType type) {
     switch (type) {
@@ -61,17 +60,14 @@ class AsideComponent
         return;
     }
 
-    panes.forEach((k, v) =>
-    activePaneId = v
+    panes.forEach((k, v) => activePaneId = v
         .id); // FIXME: найти более элегантный способ установить активную панель
 
     _changeDetectorRef.detectChanges();
   }
 
   void updatePanesInfo(Type type, AbstractPane paneInfo) {
-
-    if (!panes.containsKey(type))
-      return;
+    if (!panes.containsKey(type)) return;
 
     panes[type] = paneInfo;
     activePaneId = paneInfo.id;
@@ -79,8 +75,7 @@ class AsideComponent
   }
 
   String getVisibleHref(String id) {
-    if (id == '' || id == null)
-      return null;
+    if (id == '' || id == null) return null;
 
     return "#" + id;
   }
@@ -89,19 +84,17 @@ class AsideComponent
     var result = new Map<String, bool>();
     result['tab-pane'] = true;
 
-    if (!panes.containsKey(type))
-      return result;
+    if (!panes.containsKey(type)) return result;
 
     var paneInfo = panes[type];
 
     if (paneInfo.paneClass != '' && paneInfo.paneClass != null)
       result[paneInfo.paneClass] =
-      true; //  TODO: сделать возможность использования нескольких классов, например через ;
+          true; //  TODO: сделать возможность использования нескольких классов, например через ;
 
     if (paneInfo.id == activePaneId) {
       result['active'] = true;
-    }
-    else {
+    } else {
       result['fade'] = true;
     }
 
@@ -112,15 +105,12 @@ class AsideComponent
     var result = new Map<String, bool>();
     result['nav-link'] = true;
 
-    if (!panes.containsKey(type))
-      return result;
+    if (!panes.containsKey(type)) return result;
 
     var paneInfo = panes[type];
 
-    if (paneInfo.id == activePaneId)
-      result['active'] = true;
+    if (paneInfo.id == activePaneId) result['active'] = true;
 
     return result;
   }
-
 }

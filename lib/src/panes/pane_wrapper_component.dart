@@ -5,8 +5,7 @@ import 'package:aside/src/panes/abstract_pane.dart';
 
 @Component(selector: 'dcl-wrapper')
 @View(template: '<div #target></div>')
-class PaneWrapperComponent
-    implements AfterViewInit, OnDestroy {
+class PaneWrapperComponent implements AfterViewInit, OnDestroy {
   ComponentResolver _loader;
   bool _isViewInitialized;
   ComponentRef _cmpRef;

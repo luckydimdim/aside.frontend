@@ -1,5 +1,4 @@
 class AbstractPane {
-
   /*
   * Уникальный ID панели. Используется при построении Bootstrap Tab
   * */

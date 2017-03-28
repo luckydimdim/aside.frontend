@@ -9,31 +9,33 @@ import 'package:angular2/platform/common.dart';
 import 'package:angular_utils/cm_router_link.dart';
 
 import 'package:master_layout/master_layout_component.dart';
+import 'package:alert/src/alert_service.dart';
 
 import 'package:aside/aside_component.dart';
 import 'package:aside/aside_service.dart';
 import 'package:aside/pane_types.dart';
 
 bool get isDebug =>
-    (const String.fromEnvironment('PRODUCTION', defaultValue: 'false')) != 'true';
+    (const String.fromEnvironment('PRODUCTION', defaultValue: 'false')) !=
+    'true';
 
-@Component(
-    selector: 'app',
-    providers: const [
-      ROUTER_PROVIDERS,
-      const Provider(LocationStrategy, useClass: HashLocationStrategy)])
-@View(
-    template: '<master-layout></master-layout>',
-    directives: const [MasterLayoutComponent, AsideComponent, RouterOutlet, CmRouterLink])
+@Component(selector: 'app', providers: const [
+  ROUTER_PROVIDERS,
+  const Provider(LocationStrategy, useClass: HashLocationStrategy)
+])
+@View(template: '<master-layout></master-layout>', directives: const [
+  MasterLayoutComponent,
+  AsideComponent,
+  RouterOutlet,
+  CmRouterLink
+])
 class AppComponent {
-
   final AsideService _asideService;
 
   AppComponent(this._asideService) {
     _asideService.addPane(PaneType.Timeline);
     _asideService.addPane(PaneType.Dashboard);
     _asideService.addPane(PaneType.Messages);
-
   }
 }
 
@@ -44,7 +46,10 @@ main() async {
 
   ComponentRef ref = await bootstrap(AppComponent, [
     ROUTER_PROVIDERS,
-    const Provider(LocationStrategy, useClass: HashLocationStrategy), const Provider(AsideService)]);
+    const Provider(LocationStrategy, useClass: HashLocationStrategy),
+    const Provider(AsideService),
+    const Provider(AlertService),
+  ]);
 
   if (isDebug) {
     print('Application in DebugMode');
