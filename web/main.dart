@@ -19,20 +19,23 @@ bool get isDebug =>
     (const String.fromEnvironment('PRODUCTION', defaultValue: 'false')) !=
     'true';
 
-@Component(selector: 'app', providers: const [
-  ROUTER_PROVIDERS,
-  const Provider(LocationStrategy, useClass: HashLocationStrategy)
-])
-@View(template: '<master-layout></master-layout>', directives: const [
-  MasterLayoutComponent,
-  AsideComponent,
-  RouterOutlet,
-  CmRouterLink
-])
+@Component(
+  selector: 'app',
+  providers: const [
+    ROUTER_PROVIDERS,
+    const Provider(LocationStrategy, useClass: HashLocationStrategy)],
+    template: '<master-layout></master-layout>',
+    directives: const [
+      MasterLayoutComponent,
+      AsideComponent,
+      RouterOutlet,
+      CmRouterLink]
+)
 class AppComponent {
   final AsideService _asideService;
 
   AppComponent(this._asideService) {
+    _asideService.addPane(PaneType.ContractSearch);
     _asideService.addPane(PaneType.Timeline);
     _asideService.addPane(PaneType.Dashboard);
     _asideService.addPane(PaneType.Messages);

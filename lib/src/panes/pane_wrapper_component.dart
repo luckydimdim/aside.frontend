@@ -55,9 +55,4 @@ class PaneWrapperComponent implements AfterViewInit, OnDestroy {
       initialized.emit((_cmpRef.instance as AbstractPane));
     });
   }
-
-/*ngOnChanges() {
-    updateComponent();
-  }
-  */
 }
