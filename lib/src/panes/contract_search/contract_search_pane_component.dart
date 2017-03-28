@@ -1,5 +1,5 @@
 import 'package:angular2/core.dart';
-import '../../panes/abstract_pane.dart';
+import '../abstract_pane.dart';
 
 @Component(selector: 'contract-search-pane')
 @View(templateUrl: 'contract_search_pane_component.html')

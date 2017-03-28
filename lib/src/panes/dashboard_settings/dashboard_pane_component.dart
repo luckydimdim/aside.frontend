@@ -1,5 +1,5 @@
 import 'package:angular2/core.dart';
-import 'package:aside/src/panes/abstract_pane.dart';
+import '../abstract_pane.dart';
 
 @Component(selector: 'dashboard-pane')
 @View(templateUrl: 'dashboard_pane_component.html')
