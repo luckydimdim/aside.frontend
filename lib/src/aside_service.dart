@@ -39,14 +39,14 @@ class AsideService {
    * Открыть панель
    */
   void showPane() {
-    (querySelector('body') as BodyElement).classes.removeWhere((className) => className == 'aside-menu-open');
+    (querySelector('body') as BodyElement).classes.add('aside-menu-open');
   }
 
   /**
    * Закрыть панель
    */
   void hidePane() {
-    (querySelector('body') as BodyElement).classes.add('aside-menu-open');
+    (querySelector('body') as BodyElement).classes.removeWhere((className) => className == 'aside-menu-open');
   }
 
   /**
