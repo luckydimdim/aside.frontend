@@ -8,12 +8,20 @@ import 'package:angular2/src/platform/browser/location/hash_location_strategy.da
 import 'package:angular2/platform/common.dart';
 import 'package:angular_utils/cm_router_link.dart';
 
+import 'package:http/http.dart';
+import 'package:http/browser_client.dart';
+
 import 'package:master_layout/master_layout_component.dart';
 import 'package:alert/src/alert_service.dart';
+import 'package:logger/logger_service.dart';
+import 'package:config/config_service.dart';
 
 import 'package:aside/aside_component.dart';
 import 'package:aside/aside_service.dart';
 import 'package:aside/pane_types.dart';
+
+import 'package:contracts/contracts_service.dart';
+import 'package:contracts/contract_general_service.dart';
 
 bool get isDebug =>
     (const String.fromEnvironment('PRODUCTION', defaultValue: 'false')) !=
@@ -52,6 +60,15 @@ main() async {
     const Provider(LocationStrategy, useClass: HashLocationStrategy),
     const Provider(AsideService),
     const Provider(AlertService),
+    const Provider(ContractsService),
+    const Provider(ContractGeneralService),
+    const Provider(LoggerService),
+    const Provider(ConfigService),
+
+    // provide(Client, useClass: InMemoryDataService)
+    // Using a real back end?
+    // Import browser_client.dart and change the above to:
+    provide(Client, useFactory: () => new BrowserClient(), deps: [])
   ]);
 
   if (isDebug) {
