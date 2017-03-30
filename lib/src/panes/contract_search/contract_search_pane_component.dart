@@ -43,6 +43,6 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
   }
 
   void selectContract() {
-    _router.parent.navigate(['RequestCreator']);
+    _router.navigate(['RequestCreator']);
   }
 }
