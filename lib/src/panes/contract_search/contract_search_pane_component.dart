@@ -42,7 +42,10 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
         (event.target as SelectElement).value, orElse: () => null);
   }
 
+  /**
+   * Нажатие на кнопку выбора договора
+   */
   void selectContract() {
-    _router.navigate(['RequestCreator']);
+    _router.navigateByUrl('/creator');
   }
 }
