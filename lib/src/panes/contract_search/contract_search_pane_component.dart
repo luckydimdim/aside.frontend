@@ -46,6 +46,7 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
    * Нажатие на кнопку выбора договора
    */
   void selectContract() {
+    // TODO: необходимо избавиться от хардкода
     _router.navigateByUrl('/creator/${ selectedContract?.id ?? '' }');
   }
 }
