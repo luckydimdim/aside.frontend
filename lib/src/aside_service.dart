@@ -11,8 +11,6 @@ class AsideService {
   StreamController<PaneType> _paneAddingController = new StreamController<PaneType>();
   StreamController<PaneType> _paneRemovingController = new StreamController<PaneType>();
 
-  //dynamic add
-
   /**
    * Команда - добавить панель
    */
