@@ -3,6 +3,12 @@ import 'dart:async';
 import 'package:angular2/core.dart';
 import 'abstract_pane.dart';
 
+import '../pane_types.dart';
+import '../panes/contract_search/contract_search_pane_component.dart';
+import '../panes/dashboard_settings/dashboard_pane_component.dart';
+import '../panes/messages/messages_pane_component.dart';
+import '../panes/timeline/timeline_pane_component.dart';
+
 @Component(selector: 'dcl-wrapper')
 @View(template: '<div #target></div>')
 class PaneWrapperComponent implements AfterViewInit, OnDestroy {
@@ -14,7 +20,7 @@ class PaneWrapperComponent implements AfterViewInit, OnDestroy {
   ViewContainerRef target;
 
   @Input()
-  Type type;
+  PaneType type;
 
   @Output()
   final initialized = new EventEmitter<AbstractPane>();
@@ -43,16 +49,53 @@ class PaneWrapperComponent implements AfterViewInit, OnDestroy {
       _cmpRef.destroy();
     }
 
+    Type paneType = _resolvePaneType(type);
+
     Future<ComponentFactory> componentFactoryPromise;
-    if (type is ComponentFactory) {
+
+    // TODO: не понятно, пока коментим
+    /*if (type is ComponentFactory) {
       componentFactoryPromise = new Future.value(type);
     } else {
       componentFactoryPromise = this._loader.resolveComponent(type);
-    }
+    }*/
+
+    componentFactoryPromise = this._loader.resolveComponent(paneType);
+
     componentFactoryPromise.then((componentFactory) {
       _cmpRef = target.createComponent(componentFactory, 0, target.parentInjector);
       AbstractPane pane = _cmpRef.instance as AbstractPane;
       initialized.emit(pane);
     });
+  }
+
+  /**
+   * Полученеи типа панели по ее названию в енуме
+   */
+  Type _resolvePaneType(PaneType type) {
+    Type result = null;
+
+    switch (type) {
+      case PaneType.Timeline:
+        result = TimelinePaneComponent;
+        break;
+
+      case PaneType.Dashboard:
+        result = DashboardPaneComponent;
+        break;
+
+      case PaneType.Messages:
+        result = MessagesPaneComponent;
+        break;
+
+      case PaneType.ContractSearch:
+        result = ContractSearchPaneComponent;
+        break;
+
+      default:
+        throw new Exception('Unknown pane');
+    }
+
+    return result;
   }
 }

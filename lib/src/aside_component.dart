@@ -1,11 +1,9 @@
 import 'package:angular2/core.dart';
 
 import 'panes/dashboard_settings/dashboard_pane_component.dart';
-import 'panes/contract_search/contract_search_pane_component.dart';
 import 'panes/pane_wrapper_component.dart';
 import 'panes/abstract_pane.dart';
 import 'panes/messages/messages_pane_component.dart';
-import 'panes/timeline/timeline_pane_component.dart';
 import 'aside_service.dart';
 import 'pane_types.dart';
 
@@ -14,10 +12,10 @@ import 'pane_types.dart';
   PaneWrapperComponent,
   DashboardPaneComponent,
   MessagesPaneComponent])
-class AsideComponent implements AfterViewInit {
+class AsideComponent {
   final ChangeDetectorRef _changeDetectorRef;
   final AsideService _asideService;
-  Map<Type, AbstractPane> panes = new Map<Type, AbstractPane>();
+  Map<PaneType, AbstractPane> panes = new Map<PaneType, AbstractPane>();
 
   String activePaneId;
 
@@ -26,46 +24,20 @@ class AsideComponent implements AfterViewInit {
     _asideService.onPaneRemoving().listen((t) => removePane(t));
   }
 
-  @override
-  void ngAfterViewInit() {}
-
-  void addPane(PaneType type) {
-    if (panes.containsKey(type))
+  void addPane(PaneType PaneType) {
+    if (panes.containsKey(PaneType))
       return;
 
-    switch (type) {
-      case PaneType.Dashboard:
-        panes[DashboardPaneComponent] = new AbstractPane();
-        break;
-      case PaneType.Messages:
-        panes[MessagesPaneComponent] = new AbstractPane();
-        break;
-      case PaneType.Timeline:
-        panes[TimelinePaneComponent] = new AbstractPane();
-        break;
-      case PaneType.ContractSearch:
-        panes[ContractSearchPaneComponent] = new AbstractPane();
-        break;
-      default:
-        return;
-    }
+    panes[PaneType] = new AbstractPane();
+
     _changeDetectorRef.detectChanges();
   }
 
   void removePane(PaneType type) {
-    switch (type) {
-      case PaneType.Dashboard:
-        panes.remove(DashboardPaneComponent);
-        break;
-      case PaneType.Messages:
-        panes.remove(MessagesPaneComponent);
-        break;
-      case PaneType.Timeline:
-        panes.remove(TimelinePaneComponent);
-        break;
-      default:
-        return;
-    }
+    if (!panes.containsKey(PaneType))
+      return;
+
+    panes.remove(type);
 
     // FIXME: найти более элегантный способ установить активную панель
     panes.forEach((k, v) => activePaneId = v.id);
@@ -73,7 +45,7 @@ class AsideComponent implements AfterViewInit {
     _changeDetectorRef.detectChanges();
   }
 
-  void updatePanesInfo(Type type, AbstractPane paneInfo) {
+  void updatePanesInfo(PaneType type, AbstractPane paneInfo) {
     if (!panes.containsKey(type))
       return;
 
@@ -89,7 +61,7 @@ class AsideComponent implements AfterViewInit {
     return "#" + id;
   }
 
-  Map<String, bool> tabPanelClasses(Type type) {
+  Map<String, bool> tabPanelClasses(PaneType type) {
     var result = new Map<String, bool>();
     result['tab-pane'] = true;
 
@@ -111,11 +83,12 @@ class AsideComponent implements AfterViewInit {
     return result;
   }
 
-  Map<String, bool> navLinkClasses(Type type) {
+  Map<String, bool> navLinkClasses(PaneType type) {
     var result = new Map<String, bool>();
     result['nav-link'] = true;
 
-    if (!panes.containsKey(type)) return result;
+    if (!panes.containsKey(type))
+      return result;
 
     var paneInfo = panes[type];
 

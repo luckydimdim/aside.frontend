@@ -8,6 +8,4 @@ class MessagesPaneComponent implements AbstractPane {
   Type type = MessagesPaneComponent;
   String iconClass = 'icon-speech';
   String paneClass = 'p-1';
-
-  MessagesPaneComponent();
 }
