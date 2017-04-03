@@ -30,6 +30,9 @@ class AsideComponent implements AfterViewInit {
   void ngAfterViewInit() {}
 
   void addPane(PaneType type) {
+    if (panes.containsKey(type))
+      return;
+
     switch (type) {
       case PaneType.Dashboard:
         panes[DashboardPaneComponent] = new AbstractPane();
