@@ -9,8 +9,8 @@ import 'package:contracts/contract_general_model.dart';
 import '../abstract_pane.dart';
 
 @Component(
-  templateUrl: 'contract_search_pane_component.html',
-  selector: 'contract-search-pane')
+    templateUrl: 'contract_search_pane_component.html',
+    selector: 'contract-search-pane')
 /**
  * Поиск и выбор договоров автокомплитером
  */
@@ -37,8 +37,7 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
   ngOnInit() async {
     contracts = await _service.general.getContracts();
 
-    if (data['contractId'] != null)
-      _setSelectedContract(data['contractId']);
+    if (data['contractId'] != null) _setSelectedContract(data['contractId']);
 
     disabled = data['enabled'] != null && !data['enabled'];
   }
@@ -57,18 +56,20 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
    */
   void _setSelectedContract(String contractId) {
     selectedContract = contracts.firstWhere(
-        (ContractGeneralModel contract) =>
-        contract.id == contractId, orElse: () => null);
+        (ContractGeneralModel contract) => contract.id == contractId,
+        orElse: () => null);
   }
 
   /**
    * Нажатие на кнопку выбора договора
    */
   void selectContract() {
-    if (selectedContract == null)
-      return;
+    if (selectedContract == null) return;
 
     var router = data['router'] as Router;
-    router.navigate(['RequestCreate', { 'contractId': selectedContract.id }]);
+    router.navigate([
+      'RequestCreate',
+      {'contractId': selectedContract.id}
+    ]);
   }
 }

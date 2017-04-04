@@ -59,7 +59,8 @@ class PaneWrapperComponent implements AfterViewInit, OnDestroy {
     componentFactoryPromise = this._loader.resolveComponent(paneType);
 
     componentFactoryPromise.then((componentFactory) {
-      _cmpRef = target.createComponent(componentFactory, 0, target.parentInjector);
+      _cmpRef =
+          target.createComponent(componentFactory, 0, target.parentInjector);
       AbstractPane pane = _cmpRef.instance as AbstractPane;
       pane.data = data;
 

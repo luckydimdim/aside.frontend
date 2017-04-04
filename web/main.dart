@@ -20,25 +20,23 @@ import 'package:aside/aside_component.dart';
 import 'package:aside/aside_service.dart';
 import 'package:aside/pane_types.dart';
 
-import 'package:contracts/contracts_service.dart';
-import 'package:contracts/contract_general_service.dart';
-
 bool get isDebug =>
     (const String.fromEnvironment('PRODUCTION', defaultValue: 'false')) !=
     'true';
 
 @Component(
-  selector: 'app',
-  providers: const [
-    ROUTER_PROVIDERS,
-    const Provider(LocationStrategy, useClass: HashLocationStrategy)],
+    selector: 'app',
+    providers: const [
+      ROUTER_PROVIDERS,
+      const Provider(LocationStrategy, useClass: HashLocationStrategy)
+    ],
     template: '<master-layout></master-layout>',
     directives: const [
       MasterLayoutComponent,
       AsideComponent,
       RouterOutlet,
-      CmRouterLink]
-)
+      CmRouterLink
+    ])
 class AppComponent {
   final AsideService _asideService;
 
@@ -60,11 +58,8 @@ main() async {
     const Provider(LocationStrategy, useClass: HashLocationStrategy),
     const Provider(AsideService),
     const Provider(AlertService),
-    const Provider(ContractsService),
-    const Provider(ContractGeneralService),
     const Provider(LoggerService),
     const Provider(ConfigService),
-
     // provide(Client, useClass: InMemoryDataService)
     // Using a real back end?
     // Import browser_client.dart and change the above to:

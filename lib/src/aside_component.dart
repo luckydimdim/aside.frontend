@@ -1,5 +1,7 @@
 import 'package:angular2/core.dart';
 
+import 'package:contracts/contracts_service.dart';
+
 import 'panes/dashboard_settings/dashboard_pane_component.dart';
 import 'panes/pane_wrapper_component.dart';
 import 'panes/abstract_pane.dart';
@@ -8,11 +10,12 @@ import 'aside_service.dart';
 import 'pane_types.dart';
 import 'pane_added_event.dart';
 
-@Component(selector: 'aside')
+@Component(selector: 'aside', providers: const [ContractsService])
 @View(templateUrl: 'aside_component.html', directives: const [
   PaneWrapperComponent,
   DashboardPaneComponent,
-  MessagesPaneComponent])
+  MessagesPaneComponent
+])
 class AsideComponent {
   final ChangeDetectorRef _changeDetectorRef;
   final AsideService _asideService;
@@ -26,18 +29,15 @@ class AsideComponent {
   }
 
   void addPane(PaneAddedEvent eventData) {
-    if (panes.containsKey(eventData.type))
-      return;
+    if (panes.containsKey(eventData.type)) return;
 
-    panes[eventData.type] = new AbstractPane()
-      ..data = eventData.data;
+    panes[eventData.type] = new AbstractPane()..data = eventData.data;
 
     _changeDetectorRef.detectChanges();
   }
 
   void removePane(PaneType type) {
-    if (!panes.containsKey(PaneType))
-      return;
+    if (!panes.containsKey(PaneType)) return;
 
     panes.remove(type);
 
@@ -48,8 +48,7 @@ class AsideComponent {
   }
 
   void updatePanesInfo(PaneType type, AbstractPane paneInfo) {
-    if (!panes.containsKey(type))
-      return;
+    if (!panes.containsKey(type)) return;
 
     panes[type] = paneInfo;
     activePaneId = paneInfo.id;
@@ -58,8 +57,7 @@ class AsideComponent {
   }
 
   String getVisibleHref(String id) {
-    if (id == '' || id == null)
-      return null;
+    if (id == '' || id == null) return null;
 
     return '#' + id;
   }
@@ -68,8 +66,7 @@ class AsideComponent {
     var result = new Map<String, bool>();
     result['tab-pane'] = true;
 
-    if (!panes.containsKey(type))
-      return result;
+    if (!panes.containsKey(type)) return result;
 
     var paneInfo = panes[type];
 
@@ -90,8 +87,7 @@ class AsideComponent {
     var result = new Map<String, bool>();
     result['nav-link'] = true;
 
-    if (!panes.containsKey(type))
-      return result;
+    if (!panes.containsKey(type)) return result;
 
     var paneInfo = panes[type];
 

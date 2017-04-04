@@ -9,8 +9,10 @@ import 'pane_added_event.dart';
 
 @Injectable()
 class AsideService {
-  StreamController<PaneAddedEvent> _paneAddingController = new StreamController<PaneAddedEvent>();
-  StreamController<PaneType> _paneRemovingController = new StreamController<PaneType>();
+  StreamController<PaneAddedEvent> _paneAddingController =
+      new StreamController<PaneAddedEvent>();
+  StreamController<PaneType> _paneRemovingController =
+      new StreamController<PaneType>();
 
   /**
    * Команда - добавить панель
@@ -51,7 +53,9 @@ class AsideService {
    * Закрыть панель
    */
   void hidePane() {
-    (querySelector('body') as BodyElement).classes.removeWhere((className) => className == 'aside-menu-open');
+    (querySelector('body') as BodyElement)
+        .classes
+        .removeWhere((className) => className == 'aside-menu-open');
   }
 
   /**
