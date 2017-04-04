@@ -40,7 +40,7 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
     if (data['contractId'] != null)
       _setSelectedContract(data['contractId']);
 
-    disabled = data['enabled'] == null || !data['enabled'];
+    disabled = data['enabled'] != null && !data['enabled'];
   }
 
   /**
