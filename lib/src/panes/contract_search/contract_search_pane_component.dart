@@ -35,6 +35,8 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
 
   @override
   ngOnInit() async {
+    print(12312312);
+
     contracts = await _service.general.getContracts();
 
     if (data['contractId'] != null) _setSelectedContract(data['contractId']);
