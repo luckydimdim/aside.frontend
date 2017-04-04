@@ -37,7 +37,7 @@ class AsideComponent {
   }
 
   void removePane(PaneType type) {
-    if (!panes.containsKey(PaneType)) return;
+    if (!panes.containsKey(type)) return;
 
     panes.remove(type);
 
