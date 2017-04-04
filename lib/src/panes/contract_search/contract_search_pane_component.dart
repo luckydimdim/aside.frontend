@@ -23,6 +23,7 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
   ContractsService _service;
   List<ContractGeneralModel> contracts = new List<ContractGeneralModel>();
   ContractGeneralModel selectedContract = null;
+  bool disabled = false;
 
   /**
    * Дополнительные данные,
@@ -38,6 +39,8 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
 
     if (data['contractId'] != null)
       _setSelectedContract(data['contractId']);
+
+    disabled = data['enabled'] == null || !data['enabled'];
   }
 
   /**
