@@ -15,8 +15,6 @@ import '../abstract_pane.dart';
  * Поиск и выбор договоров автокомплитером
  */
 class ContractSearchPaneComponent implements AbstractPane, OnInit {
-  final Router _router;
-
   String id = 'contract-search-pane';
   Type type = ContractSearchPaneComponent;
   String iconClass = 'fa fa-file';
@@ -32,27 +30,42 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
    */
   dynamic data = null;
 
-  ContractSearchPaneComponent(this._service, this._router);
+  ContractSearchPaneComponent(this._service);
 
   @override
   ngOnInit() async {
     contracts = await _service.general.getContracts();
+
+    if (data['contractId'] != null)
+      _setSelectedContract(data['contractId']);
   }
 
   /**
    * Заполнить и показать блок с информацией о выбранном договоре
    */
   void showSelectedContractInfo(Event event) {
+    String contractId = (event.target as SelectElement).value;
+
+    _setSelectedContract(contractId);
+  }
+
+  /**
+   * Находи и устанавливает выбранный договор
+   */
+  void _setSelectedContract(String contractId) {
     selectedContract = contracts.firstWhere(
-      (ContractGeneralModel contract) => contract.id ==
-        (event.target as SelectElement).value, orElse: () => null);
+        (ContractGeneralModel contract) =>
+        contract.id == contractId, orElse: () => null);
   }
 
   /**
    * Нажатие на кнопку выбора договора
    */
   void selectContract() {
-    // TODO: необходимо избавиться от хардкода
-    _router.navigateByUrl('/compose/${ selectedContract?.id ?? '' }');
+    if (selectedContract == null)
+      return;
+
+    var router = data['router'] as Router;
+    router.navigate(['RequestCreate', { 'contractId': selectedContract.id }]);
   }
 }
