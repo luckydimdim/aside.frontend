@@ -8,4 +8,10 @@ class MessagesPaneComponent implements AbstractPane {
   Type type = MessagesPaneComponent;
   String iconClass = 'icon-speech';
   String paneClass = 'p-1';
+
+  /**
+   * Дополнительные данные,
+   * переданные из компонента-создателя панели
+   */
+  dynamic data = null;
 }

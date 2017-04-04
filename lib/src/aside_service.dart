@@ -1,21 +1,26 @@
-import 'dart:async';
 import 'dart:core';
-
 import 'dart:html';
-import 'pane_types.dart';
+import 'dart:async';
 
 import 'package:angular2/angular2.dart';
 
+import 'pane_types.dart';
+import 'pane_added_event.dart';
+
 @Injectable()
 class AsideService {
-  StreamController<PaneType> _paneAddingController = new StreamController<PaneType>();
+  StreamController<PaneAddedEvent> _paneAddingController = new StreamController<PaneAddedEvent>();
   StreamController<PaneType> _paneRemovingController = new StreamController<PaneType>();
 
   /**
    * Команда - добавить панель
    */
-  void addPane(PaneType type) {
-    _paneAddingController.add(type);
+  void addPane(PaneType type, [dynamic data]) {
+    var eventData = new PaneAddedEvent()
+      ..type = type
+      ..data = data;
+
+    _paneAddingController.add(eventData);
   }
 
   /**
@@ -28,7 +33,7 @@ class AsideService {
   /**
    * Событие - добавить панель
    */
-  Stream<PaneType> onPaneAdding() => _paneAddingController.stream;
+  Stream<PaneAddedEvent> onPaneAdding() => _paneAddingController.stream;
 
   /**
    * Событие - удалить панель

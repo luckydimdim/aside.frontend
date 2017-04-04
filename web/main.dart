@@ -43,10 +43,10 @@ class AppComponent {
   final AsideService _asideService;
 
   AppComponent(this._asideService) {
-    _asideService.addPane(PaneType.ContractSearch);
-    _asideService.addPane(PaneType.Timeline);
-    _asideService.addPane(PaneType.Dashboard);
-    _asideService.addPane(PaneType.Messages);
+    _asideService.addPane(PaneType.contractSearch);
+    _asideService.addPane(PaneType.timeline);
+    _asideService.addPane(PaneType.dashboard);
+    _asideService.addPane(PaneType.messages);
   }
 }
 

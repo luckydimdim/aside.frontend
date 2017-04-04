@@ -6,6 +6,7 @@ import 'panes/abstract_pane.dart';
 import 'panes/messages/messages_pane_component.dart';
 import 'aside_service.dart';
 import 'pane_types.dart';
+import 'pane_added_event.dart';
 
 @Component(selector: 'aside')
 @View(templateUrl: 'aside_component.html', directives: const [
@@ -24,11 +25,12 @@ class AsideComponent {
     _asideService.onPaneRemoving().listen((t) => removePane(t));
   }
 
-  void addPane(PaneType PaneType) {
-    if (panes.containsKey(PaneType))
+  void addPane(PaneAddedEvent eventData) {
+    if (panes.containsKey(eventData.type))
       return;
 
-    panes[PaneType] = new AbstractPane();
+    panes[eventData.type] = new AbstractPane()
+      ..data = eventData.data;
 
     _changeDetectorRef.detectChanges();
   }
@@ -51,6 +53,7 @@ class AsideComponent {
 
     panes[type] = paneInfo;
     activePaneId = paneInfo.id;
+
     _changeDetectorRef.detectChanges();
   }
 
@@ -58,7 +61,7 @@ class AsideComponent {
     if (id == '' || id == null)
       return null;
 
-    return "#" + id;
+    return '#' + id;
   }
 
   Map<String, bool> tabPanelClasses(PaneType type) {

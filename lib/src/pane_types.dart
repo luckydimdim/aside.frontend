@@ -3,22 +3,27 @@
  */
 enum PaneType {
   /**
+   * Панель не задана
+   */
+  none,
+
+  /**
    * Последний события
    */
-  Timeline,
+  timeline,
 
   /**
    * Настройка виджетов
    */
-  Dashboard,
+  dashboard,
 
   /**
    * Сообщения
    */
-  Messages,
+  messages,
 
   /**
    * Поиск и выбор договора
    */
-  ContractSearch
+  contractSearch
 }

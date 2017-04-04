@@ -9,5 +9,9 @@ class TimelinePaneComponent implements AbstractPane {
   String iconClass = 'icon-list';
   String paneClass = '';
 
-  TimelinePaneComponent();
+  /**
+   * Дополнительные данные,
+   * переданные из компонента-создателя панели
+   */
+  dynamic data = null;
 }

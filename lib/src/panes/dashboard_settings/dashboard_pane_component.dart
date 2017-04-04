@@ -8,4 +8,10 @@ class DashboardPaneComponent implements AbstractPane {
   Type type = DashboardPaneComponent;
   String iconClass = 'icon-settings';
   String paneClass = 'p-1';
+
+  /**
+   * Дополнительные данные,
+   * переданные из компонента-создателя панели
+   */
+  dynamic data = null;
 }

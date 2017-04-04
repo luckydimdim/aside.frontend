@@ -8,6 +8,7 @@ import '../panes/contract_search/contract_search_pane_component.dart';
 import '../panes/dashboard_settings/dashboard_pane_component.dart';
 import '../panes/messages/messages_pane_component.dart';
 import '../panes/timeline/timeline_pane_component.dart';
+import '../pane_added_event.dart';
 
 @Component(selector: 'dcl-wrapper')
 @View(template: '<div #target></div>')
@@ -21,6 +22,9 @@ class PaneWrapperComponent implements AfterViewInit, OnDestroy {
 
   @Input()
   PaneType type;
+
+  @Input()
+  dynamic data;
 
   @Output()
   final initialized = new EventEmitter<AbstractPane>();
@@ -52,19 +56,13 @@ class PaneWrapperComponent implements AfterViewInit, OnDestroy {
     Type paneType = _resolvePaneType(type);
 
     Future<ComponentFactory> componentFactoryPromise;
-
-    // TODO: не понятно, пока коментим
-    /*if (type is ComponentFactory) {
-      componentFactoryPromise = new Future.value(type);
-    } else {
-      componentFactoryPromise = this._loader.resolveComponent(type);
-    }*/
-
     componentFactoryPromise = this._loader.resolveComponent(paneType);
 
     componentFactoryPromise.then((componentFactory) {
       _cmpRef = target.createComponent(componentFactory, 0, target.parentInjector);
       AbstractPane pane = _cmpRef.instance as AbstractPane;
+      pane.data = data;
+
       initialized.emit(pane);
     });
   }
@@ -76,19 +74,19 @@ class PaneWrapperComponent implements AfterViewInit, OnDestroy {
     Type result = null;
 
     switch (type) {
-      case PaneType.Timeline:
+      case PaneType.timeline:
         result = TimelinePaneComponent;
         break;
 
-      case PaneType.Dashboard:
+      case PaneType.dashboard:
         result = DashboardPaneComponent;
         break;
 
-      case PaneType.Messages:
+      case PaneType.messages:
         result = MessagesPaneComponent;
         break;
 
-      case PaneType.ContractSearch:
+      case PaneType.contractSearch:
         result = ContractSearchPaneComponent;
         break;
 

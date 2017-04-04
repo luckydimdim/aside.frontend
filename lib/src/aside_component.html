@@ -9,7 +9,7 @@
 	
 	<div class="tab-content">
 		<div [ngClass]="tabPanelClasses(tab)" role="tabpanel" *ngFor="let tab of panes.keys" [attr.id]="panes[tab].id">
-			<dcl-wrapper [type]="tab" (initialized)="updatePanesInfo(tab, $event)"></dcl-wrapper>
+			<dcl-wrapper [type]="tab" [data]="panes[tab].data" (initialized)="updatePanesInfo(tab, $event)"></dcl-wrapper>
 		</div>
 	</div>
 

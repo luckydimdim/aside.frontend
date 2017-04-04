@@ -26,6 +26,12 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
   List<ContractGeneralModel> contracts = new List<ContractGeneralModel>();
   ContractGeneralModel selectedContract = null;
 
+  /**
+   * Дополнительные данные,
+   * переданные из компонента-создателя панели
+   */
+  dynamic data = null;
+
   ContractSearchPaneComponent(this._service, this._router);
 
   @override
