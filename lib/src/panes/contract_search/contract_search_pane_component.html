@@ -4,7 +4,7 @@
     используйте его номер, наименование, подрядчика или объект строительства.
   </small>
 </div>
-<h6 *ngIf="disabled">
+<h6 *ngIf="disabled && selectedContract != null">
   {{ selectedContract.name }}
 </h6>
 <div class="aside-options" *ngIf="!disabled">
