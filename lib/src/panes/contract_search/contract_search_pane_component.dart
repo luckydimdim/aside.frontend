@@ -35,11 +35,12 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
 
   @override
   ngOnInit() async {
+
+    disabled = data['enabled'] != null && !data['enabled'];
+
     contracts = await _service.general.getContracts();
 
     if (data['contractId'] != null) _setSelectedContract(data['contractId']);
-
-    disabled = data['enabled'] != null && !data['enabled'];
   }
 
   /**
