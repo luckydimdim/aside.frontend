@@ -7,7 +7,7 @@
 <h6 *ngIf="disabled">
   {{ selectedContract.name }}
 </h6>
-<div class="aside-options">
+<div class="aside-options" *ngIf="!disabled">
   <div class="clearfix mt-2">
     <fieldset class="form-group" *ngIf="!disabled">
       <select class="form-control" (change)="showSelectedContractInfo($event)" [disabled]="disabled ? true : false">
@@ -15,9 +15,6 @@
         <option *ngFor="#contract of contracts" [value]="contract.id" [selected]="contract.id == selectedContract?.id">{{ contract.name }}</option>
       </select>
     </fieldset>
-    <div *ngIf="disabled">
-      {{ selectedContract.name }}
-    </div>
   </div>
 </div>
 
