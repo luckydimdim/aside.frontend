@@ -35,7 +35,6 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
 
   @override
   ngOnInit() async {
-
     disabled = data['enabled'] != null && !data['enabled'];
 
     contracts = await _service.general.getContracts();
@@ -70,7 +69,7 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
     var router = data['router'] as Router;
 
     router.navigate([
-      'Request/RequestCreate',
+      'Request/:id/RequestCreate',
       {'id': selectedContract.id}
     ]);
   }
