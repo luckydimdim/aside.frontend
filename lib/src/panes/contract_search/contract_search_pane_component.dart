@@ -68,9 +68,6 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
 
     var router = data['router'] as Router;
 
-    router.navigate([
-      'Request/:id/RequestCreate',
-      {'id': selectedContract.id}
-    ]);
+    router.navigate([ 'Request', { 'id': selectedContract.id }, [ 'RequestCreate' ] ]);
   }
 }
