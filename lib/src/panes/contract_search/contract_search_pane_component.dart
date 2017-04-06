@@ -68,9 +68,13 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
     if (selectedContract == null) return;
 
     var router = data['router'] as Router;
-    router.navigate([
+
+    // TODO: сделать переход при помощи navigate()
+    router.navigateByUrl('${selectedContract.id}/create');
+
+    /*router.navigate([
       'RequestCreate',
-      {'contractId': selectedContract.id}
-    ]);
+      {'id': selectedContract.id}
+    ]);*/
   }
 }
