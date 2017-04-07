@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:angular2/core.dart';
 
 import 'package:contracts/contracts_service.dart';
@@ -16,16 +18,19 @@ import 'pane_added_event.dart';
   DashboardPaneComponent,
   MessagesPaneComponent
 ])
-class AsideComponent {
+class AsideComponent implements OnDestroy{
   final ChangeDetectorRef _changeDetectorRef;
   final AsideService _asideService;
+  StreamSubscription _onPaneAddingSubscription;
+  StreamSubscription _onPaneRemovingSubscription;
+
   Map<PaneType, AbstractPane> panes = new Map<PaneType, AbstractPane>();
 
   String activePaneId;
 
   AsideComponent(this._changeDetectorRef, this._asideService) {
-    _asideService.onPaneAdding().listen((t) => addPane(t));
-    _asideService.onPaneRemoving().listen((t) => removePane(t));
+    _onPaneAddingSubscription = _asideService.onPaneAdding().listen((t) => addPane(t));
+    _onPaneRemovingSubscription = _asideService.onPaneRemoving().listen((t) => removePane(t));
   }
 
   void addPane(PaneAddedEvent eventData) {
@@ -94,5 +99,11 @@ class AsideComponent {
     if (paneInfo.id == activePaneId) result['active'] = true;
 
     return result;
+  }
+
+  @override
+  ngOnDestroy()  {
+    _onPaneAddingSubscription.cancel();
+    _onPaneRemovingSubscription.cancel();
   }
 }

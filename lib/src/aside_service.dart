@@ -10,9 +10,9 @@ import 'pane_added_event.dart';
 @Injectable()
 class AsideService {
   StreamController<PaneAddedEvent> _paneAddingController =
-      new StreamController<PaneAddedEvent>();
+      new StreamController<PaneAddedEvent>.broadcast();
   StreamController<PaneType> _paneRemovingController =
-      new StreamController<PaneType>();
+      new StreamController<PaneType>.broadcast();
 
   /**
    * Команда - добавить панель
