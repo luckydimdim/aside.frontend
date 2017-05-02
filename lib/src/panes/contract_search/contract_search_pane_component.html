@@ -12,7 +12,7 @@
     <fieldset class="form-group" *ngIf="!disabled">
       <select class="form-control" (change)="showSelectedContractInfo($event)" [disabled]="disabled ? true : false">
         <option value="">Выберите договор</option>
-        <option *ngFor="#contract of contracts" [value]="contract.id" [selected]="contract.id == selectedContract?.id">{{ contract.name }}</option>
+        <option *ngFor="let contract of contracts" [value]="contract.id" [selected]="contract.id == selectedContract?.id">{{ contract.name }}</option>
       </select>
     </fieldset>
   </div>
