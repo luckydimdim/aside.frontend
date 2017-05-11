@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:html';
 
 import 'package:angular2/core.dart';
 
@@ -48,6 +49,12 @@ class AsideComponent implements OnDestroy{
 
     // FIXME: найти более элегантный способ установить активную панель
     panes.forEach((k, v) => activePaneId = v.id);
+
+    if (panes.isEmpty) {
+      (querySelector('body') as BodyElement)
+          .classes
+          .removeWhere((className) => className == 'aside-menu-open');
+    }
 
     _changeDetectorRef.detectChanges();
   }
