@@ -24,9 +24,14 @@
     <li><span>Заключен</span> <span>{{selectedContract.startDate | date:'dd.MM.yyyy'}}</span></li>
     <li><span>Истекает</span><span>{{selectedContract.finishDate | date:'dd.MM.yyyy'}}</span></li>
     <li><span>С НДС</span><span>{{selectedContract.vatIncluded ? 'да' : 'нет' }}</span></li>
-    <li><span>Валюта</span><span>{{selectedContract.currency}}</span></li>
-    <li class="mt-1"><span class="font-weight-bold">Сумма</span><span class="font-weight-bold">{{selectedContract.amount}} <i
-      class="fa fa-rub"></i></span></li>
+  
+    <li>
+      <span class="font-weight-bold">Стоимость</span>
+      <span >
+          <div class="text-md-right" *ngFor="let amount of selectedContract.amounts">{{amount.value | cmFormatMoney }} {{amount.currencySysName}}</div>
+        </span>
+    </li>
+    
   </ul>
 </div>
 
