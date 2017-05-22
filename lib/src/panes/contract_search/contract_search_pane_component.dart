@@ -3,15 +3,16 @@ import 'dart:html';
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 
+import 'package:angular_utils/cm_format_money_pipe.dart';
 import 'package:contracts/contracts_service.dart';
 import 'package:contracts/contract_general_model.dart';
-import 'package:angular_utils/cm_format_money_pipe.dart';
+
 
 import '../abstract_pane.dart';
 
 @Component(
     templateUrl: 'contract_search_pane_component.html',
-    pipes: [CmFormatMoneyPipe],
+    pipes: const [CmFormatMoneyPipe],
     selector: 'contract-search-pane')
 /**
  * Поиск и выбор договоров автокомплитером

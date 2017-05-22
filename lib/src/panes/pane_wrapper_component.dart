@@ -8,10 +8,8 @@ import '../panes/contract_search/contract_search_pane_component.dart';
 import '../panes/dashboard_settings/dashboard_pane_component.dart';
 import '../panes/messages/messages_pane_component.dart';
 import '../panes/timeline/timeline_pane_component.dart';
-import '../pane_added_event.dart';
 
-@Component(selector: 'dcl-wrapper')
-@View(template: '<div #target></div>')
+@Component(selector: 'dcl-wrapper', template: '<div #target></div>')
 class PaneWrapperComponent implements AfterViewInit, OnDestroy {
   ComponentResolver _loader;
   bool _isViewInitialized;

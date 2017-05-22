@@ -13,13 +13,18 @@ import 'aside_service.dart';
 import 'pane_types.dart';
 import 'pane_added_event.dart';
 
-@Component(selector: 'aside', providers: const [ContractsService])
-@View(templateUrl: 'aside_component.html', directives: const [
-  PaneWrapperComponent,
-  DashboardPaneComponent,
-  MessagesPaneComponent
-])
-class AsideComponent implements OnDestroy{
+@Component(
+    selector: 'aside',
+    templateUrl: 'aside_component.html',
+    providers: const [
+      ContractsService
+    ],
+    directives: const [
+      PaneWrapperComponent,
+      DashboardPaneComponent,
+      MessagesPaneComponent
+    ])
+class AsideComponent implements OnDestroy {
   final ChangeDetectorRef _changeDetectorRef;
   final AsideService _asideService;
   StreamSubscription _onPaneAddingSubscription;
@@ -30,8 +35,10 @@ class AsideComponent implements OnDestroy{
   String activePaneId;
 
   AsideComponent(this._changeDetectorRef, this._asideService) {
-    _onPaneAddingSubscription = _asideService.onPaneAdding().listen((t) => addPane(t));
-    _onPaneRemovingSubscription = _asideService.onPaneRemoving().listen((t) => removePane(t));
+    _onPaneAddingSubscription =
+        _asideService.onPaneAdding().listen((t) => addPane(t));
+    _onPaneRemovingSubscription =
+        _asideService.onPaneRemoving().listen((t) => removePane(t));
   }
 
   void addPane(PaneAddedEvent eventData) {
@@ -109,7 +116,7 @@ class AsideComponent implements OnDestroy{
   }
 
   @override
-  ngOnDestroy()  {
+  ngOnDestroy() {
     _onPaneAddingSubscription.cancel();
     _onPaneRemovingSubscription.cancel();
   }
