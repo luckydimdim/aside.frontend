@@ -22,6 +22,8 @@ dependencies:
       git: http://cm-ylng-msk-04/git/alert.frontend.git
     contracts:
       git: http://cm-ylng-msk-04/git/contracts.frontend.git
+    time_sheet:
+      git: http://cm-ylng-msk-04/git/time_sheet.frontend.git
     logger:
       git: http://cm-ylng-msk-04/git/logger.frontend.git
     config:

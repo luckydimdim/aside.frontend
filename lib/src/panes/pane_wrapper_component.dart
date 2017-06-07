@@ -8,6 +8,7 @@ import '../panes/contract_search/contract_search_pane_component.dart';
 import '../panes/dashboard_settings/dashboard_pane_component.dart';
 import '../panes/messages/messages_pane_component.dart';
 import '../panes/timeline/timeline_pane_component.dart';
+import '../panes/attachments/attachments_pane_component.dart';
 
 @Component(selector: 'dcl-wrapper', template: '<div #target></div>')
 class PaneWrapperComponent implements AfterViewInit, OnDestroy {
@@ -87,6 +88,10 @@ class PaneWrapperComponent implements AfterViewInit, OnDestroy {
 
       case PaneType.contractSearch:
         result = ContractSearchPaneComponent;
+        break;
+
+      case PaneType.attachments:
+        result = AttachmentsPaneComponent;
         break;
 
       default:

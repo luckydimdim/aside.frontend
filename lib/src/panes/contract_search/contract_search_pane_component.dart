@@ -7,7 +7,6 @@ import 'package:angular_utils/cm_format_money_pipe.dart';
 import 'package:contracts/contracts_service.dart';
 import 'package:contracts/contract_general_model.dart';
 
-
 import '../abstract_pane.dart';
 
 @Component(
@@ -71,6 +70,10 @@ class ContractSearchPaneComponent implements AbstractPane, OnInit {
 
     var router = data['router'] as Router;
 
-    router.navigate([ 'Request', { 'id': selectedContract.id }, 'RequestCreate' ]);
+    router.navigate([
+      'Request',
+      {'id': selectedContract.id},
+      'RequestCreate'
+    ]);
   }
 }

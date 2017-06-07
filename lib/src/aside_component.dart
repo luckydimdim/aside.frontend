@@ -4,11 +4,13 @@ import 'dart:html';
 import 'package:angular2/core.dart';
 
 import 'package:contracts/contracts_service.dart';
+import 'package:time_sheet/time_sheet_service.dart';
 
 import 'panes/dashboard_settings/dashboard_pane_component.dart';
 import 'panes/pane_wrapper_component.dart';
 import 'panes/abstract_pane.dart';
 import 'panes/messages/messages_pane_component.dart';
+import 'panes/attachments/attachments_pane_component.dart';
 import 'aside_service.dart';
 import 'pane_types.dart';
 import 'pane_added_event.dart';
@@ -17,12 +19,14 @@ import 'pane_added_event.dart';
     selector: 'aside',
     templateUrl: 'aside_component.html',
     providers: const [
-      ContractsService
+      ContractsService,
+      TimeSheetService
     ],
     directives: const [
       PaneWrapperComponent,
       DashboardPaneComponent,
-      MessagesPaneComponent
+      MessagesPaneComponent,
+      AttachmentsPaneComponent
     ])
 class AsideComponent implements OnDestroy {
   final ChangeDetectorRef _changeDetectorRef;

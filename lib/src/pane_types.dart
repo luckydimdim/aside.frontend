@@ -25,5 +25,10 @@ enum PaneType {
   /**
    * Поиск и выбор договора
    */
-  contractSearch
+  contractSearch,
+
+  /**
+   * Вложения
+   */
+  attachments,
 }
