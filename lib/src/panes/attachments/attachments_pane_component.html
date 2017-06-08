@@ -3,7 +3,7 @@
     <i [ngClass]="[getAttachmentClass(attachment.contentType), ' bg-primary', 'fa', 'fa-lg']"></i>
     <div class="desc" style="overflow: hidden; width: 130px">
       <div class="title" (click)="getAttachment(attachment.name)" style="cursor: pointer">{{attachment.name}}</div>
-      <small>{{attachment.length / 1000}} Кб</small>
+      <small>{{ (attachment.length / 1000 / 1024).round() }} Мб</small>
     </div>
     <div class="actions">
       <button *ngIf="!disabled" (click)="deleteAttachment(attachment.name)" type="button" class="btn btn-tiny"><i
@@ -11,7 +11,7 @@
       </button>
     </div>
   </li>
-  <li class="divider text-center" *ngIf="!disabled">
+  <li class="divider text-center mt-1" *ngIf="!disabled">
     <input #fileInput type="file" placeholder="Загрузить файл" class="form-control" (change)="fileChange($event)">
   </li>
 </ul>
