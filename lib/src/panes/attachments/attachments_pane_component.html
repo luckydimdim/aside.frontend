@@ -1,12 +1,12 @@
 <ul class="icons-list" *ngIf="model != null">
   <li *ngFor="let attachment of model">
     <i [ngClass]="[getAttachmentClass(attachment.contentType), ' bg-primary', 'fa', 'fa-lg']"></i>
-    <div class="desc" style="overflow: hidden; width: 130px">
+    <div class="desc" style="overflow: hidden; margin-right: 35px">
       <div class="title" (click)="getAttachment(attachment.name)" style="cursor: pointer">{{attachment.name}}</div>
       <small>{{ (attachment.length / 1000).round() }} Кб</small>
     </div>
     <div class="actions">
-      <button *ngIf="!disabled" (click)="deleteAttachment(attachment.name)" type="button" class="btn btn-tiny"><i
+      <button *ngIf="!disabled" (click)="deleteAttachment(attachment.name)" type="button" class="btn btn-tiny" style="padding: 0"><i
         class="fa fa-remove" style="color: red"></i>
       </button>
     </div>
