@@ -95,6 +95,12 @@ class AttachmentsPaneComponent implements AbstractPane, OnInit {
         return;
       }
 
+      if (file.size == 0) {
+        window.alert('Нельзя загружать файл нулевого размера');
+        inputElement.value = '';
+        return;
+      }
+
       try {
         await _timeSheetService.addAttachment(timeSheetId, file);
       } catch (e) {
