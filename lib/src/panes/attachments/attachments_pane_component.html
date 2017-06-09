@@ -1,5 +1,5 @@
 <ul class="icons-list" *ngIf="model != null">
-  <li *ngFor="let attachment of model" style="line-height: 1.6; height: auto;">
+  <li *ngFor="let attachment of model" style="line-height: 1.7; height: auto;">
     <i [ngClass]="[getAttachmentClass(attachment.contentType), ' bg-primary', 'fa', 'fa-lg']"></i>
     <div class="desc" style="height: auto;">
       <div class="title" (click)="getAttachment(attachment.name)" style="cursor: pointer"><a href="javascript: void(0)" style="display: block; overflow: hidden; margin-right: 35px;">{{ attachment.name }}</a></div>
