@@ -2,7 +2,7 @@
   <li *ngFor="let attachment of model">
     <i [ngClass]="[getAttachmentClass(attachment.contentType), ' bg-primary', 'fa', 'fa-lg']"></i>
     <div class="desc">
-      <div class="title" (click)="getAttachment(attachment.name)"><a href="javascript: void(0)">{{ attachment.name }}</a></div>
+      <div class="title" (click)="getAttachment(attachment.name)"><a href="javascript: void(0)">{{ decodeAttachmentName(attachment.name) }}</a></div>
       <small>{{ attachment.length | cmFormatSize }}</small>
     </div>
     <div class="actions">

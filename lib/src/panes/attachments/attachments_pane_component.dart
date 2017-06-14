@@ -140,4 +140,8 @@ class AttachmentsPaneComponent implements AbstractPane, OnInit {
 
     a.click();
   }
+
+  String decodeAttachmentName(String str) {
+    return Uri.decodeFull(str);
+  }
 }
