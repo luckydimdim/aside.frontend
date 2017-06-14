@@ -35,6 +35,8 @@ class AttachmentsPaneComponent implements AbstractPane, OnInit {
 
   String timeSheetId;
 
+  bool isUploading = false;
+
   /**
    * Дополнительные данные,
    * переданные из компонента-создателя панели
@@ -84,8 +86,10 @@ class AttachmentsPaneComponent implements AbstractPane, OnInit {
     if (fileList.length > 0) {
       File file = fileList[0];
 
+      var fileName = Uri.encodeFull(file.name);
+
       bool exist =
-          model.any((e) => e.name.toLowerCase() == file.name.toLowerCase());
+          model.any((e) => e.name.toLowerCase() == fileName.toLowerCase());
 
       var inputElement = (fileInput.nativeElement as InputElement);
 
@@ -102,11 +106,15 @@ class AttachmentsPaneComponent implements AbstractPane, OnInit {
       }
 
       try {
+        isUploading = true;
         await _timeSheetService.addAttachment(timeSheetId, file);
       } catch (e) {
         model = await _timeSheetService.getAttachments(timeSheetId);
         inputElement.value = '';
         rethrow;
+      }
+      finally {
+        isUploading = false;
       }
 
       model = await _timeSheetService.getAttachments(timeSheetId);
