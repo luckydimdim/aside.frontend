@@ -129,11 +129,15 @@ class AttachmentsPaneComponent implements AbstractPane, OnInit {
    * Загрузить вложение
    */
   getAttachment(String fileName) async {
-    var blob = await _timeSheetService.getAttachment(timeSheetId, fileName);
-
+    var token =  await _timeSheetService.createAttachmentToken(timeSheetId, fileName);
     var a = new AnchorElement();
-    a.href = Url.createObjectUrl(blob);
+    a.href = _timeSheetService.getAttachmentDownloadUrl(timeSheetId, fileName, token);
     a.download = fileName;
+
+    // только ради IE
+    a.classes.add('hidden-xs-up');
+    document.body.append(a);
+
     a.click();
   }
 }
