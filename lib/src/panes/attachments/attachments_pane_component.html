@@ -1,5 +1,5 @@
-﻿<ul class="icons-list cm-panes attachments-pane" *ngIf="model != null">
-  <li *ngFor="let attachment of model">
+﻿<ul class="icons-list cm-panes" *ngIf="model != null">
+  <li *ngFor="let attachment of model" class="attachments-pane">
     <i [ngClass]="[getAttachmentClass(attachment.contentType), ' bg-primary', 'fa', 'fa-lg']"></i>
     <div class="desc">
       <div class="title" (click)="getAttachment(attachment.name)"><a href="javascript: void(0)">{{ decodeAttachmentName(attachment.name) }}</a></div>
@@ -11,7 +11,7 @@
       </button>
     </div>
   </li>
-  <li class="divider text-center mt-1" *ngIf="!disabled">
+  <li class="divider text-center mt-1 attachments-pane" *ngIf="!disabled">
     <label class="custom-file" *ngIf="!isUploading">
       <input #fileInput type="file" placeholder="Загрузить файл" class="custom-file-input" (change)="fileChange($event)">
       <span class="custom-file-control"></span>
