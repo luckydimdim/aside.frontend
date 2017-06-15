@@ -1,4 +1,5 @@
-﻿<ul class="icons-list cm-panes" *ngIf="model != null">
+﻿<loading-spin  *ngIf="model == null"></loading-spin>
+<ul class="icons-list cm-panes" *ngIf="model != null">
   <li *ngFor="let attachment of model" class="attachments-pane">
     <i [ngClass]="[getAttachmentClass(attachment.contentType), ' bg-primary', 'fa', 'fa-lg']"></i>
     <div class="desc">

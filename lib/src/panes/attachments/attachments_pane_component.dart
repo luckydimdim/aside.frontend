@@ -4,7 +4,8 @@ import 'dart:async';
 import 'package:angular2/core.dart';
 import 'package:angular2/router.dart';
 
-import 'package:angular_utils/cm_format_size_pipe.dart';
+import 'package:angular_utils/pipes.dart';
+import 'package:angular_utils/directives.dart';
 import 'package:time_sheet/time_sheet_service.dart';
 import 'package:time_sheet/models.dart';
 
@@ -16,7 +17,7 @@ import '../abstract_pane.dart';
 @Component(
     templateUrl: 'attachments_pane_component.html',
     selector: 'attachments-pane',
-    pipes: const [CmFormatSizePipe])
+    pipes: const [CmFormatSizePipe], directives:const[CmLoadingSpinComponent])
 class AttachmentsPaneComponent implements AbstractPane, OnInit {
   String id = 'attachments-pane';
   Type type = AttachmentsPaneComponent;
